@@ -38,25 +38,22 @@ public class RobotLabDFS {
     Stack<Node> stack = new Stack<Node>();
     stack.push(S);
     
-    do {
+    while(!stack.empty()) {
 	if(currentNode.equals(G)) {
 	    break;
 	} else {
 	    if(currentNode.getChild() == null) {
-	      int i = 0;
-	      int j = 0;
 		currentNode.explored = true;
 		currentNode = currentNode.pred;
-		Node printMe = stack.pop();
-		LCD.drawString(printMe.name, i, j);
-		j++;
+		stack.pop();
 	    }
 	    else {
-	      stack.push(currentNode.getChild());
-	      currentNode = currentNode.getChild();
+		currentNode.getChild().pred = currentNode;
+	      	stack.push(currentNode.getChild());
+	      	currentNode = currentNode.getChild();
 	    }
 	}
-    } while(currentNode.pred != null);
+    }
     
    /* int i = 0;
     int j = 0;
